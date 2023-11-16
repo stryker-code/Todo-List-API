@@ -34,8 +34,8 @@ services:
   mysql:
       container_name: mysql_todo_list
       image: mysql:8.0.20
-      #volumes:
-      #    - ./storage/mysql-data:/var/lib/mysql
+      volumes:
+          - ./storage/mysql-data:/var/lib/mysql
       ports:
           - "3306:3306"
       environment:
