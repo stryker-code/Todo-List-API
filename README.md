@@ -44,26 +44,21 @@ Also task can have subtasks, level of subtask is not limited
    
 3. Install dependencies
     ```sh
-    composer install
+    docker exec php-fpm_todo_list composer install
     ```
 
-4. Generate application key (if not already generated)
+4. Run database migrations
     ```sh
-    php artisan key:generate
+    docker exec php-fpm_todo_list php artisan migrate
     ```
 
-5. Run database migrations
+5. Run seeders
     ```sh
-    php artisan migrate
-    ```
-
-6. Optimize configs
-    ```sh
-    php artisan optimize 
+    docker exec php-fpm_todo_list php artisan db:seed
     ```
    
 ## Running tests
 
 ```sh
-php artisan test
+docker exec php-fpm_todo_list php artisan test
 ```
