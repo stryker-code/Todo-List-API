@@ -1,14 +1,14 @@
 # Laravel Todo List API
 
 
-API should provide task management:
+## API should provide task management:
 - get own tasks by filter
 - create own task
 - edit own task
 - mark own task
 - delete own task
 
-After getting the tasks list user can:
+## After getting the tasks list user can:
 - filter by status
 - filter by priority 
 - filter by title, description (fulltext search)
@@ -16,12 +16,12 @@ After getting the tasks list user can:
 must be support sorting by two fields
 Example: (priority desc, createdAt asc)
 
-User can't:
+## User can't:
 - change or remove another user tasks
 - remove already done task
 - mark as done if task has not completed subtasks
 
-Every task should have fields:
+## Every task should have fields:
 - status (todo, done)
 - priority (1...5)
 - title
@@ -41,14 +41,22 @@ Also task can have subtasks, level of subtask is not limited
     ```sh
     docker-compose up -d
     ```
-   
+
 3. Install dependencies
     ```sh
     docker exec php-fpm_todo_list composer install
     ```
 
 4. Run database migrations
-    ```sh
+   ```env
+    DB_CONNECTION=mysql
+    DB_HOST=mysql
+    DB_PORT=3306
+    DB_DATABASE=todo_list
+    DB_USERNAME=root
+    DB_PASSWORD=root
+   ``` 
+   ```sh
     docker exec php-fpm_todo_list php artisan migrate
     ```
 
@@ -56,7 +64,17 @@ Also task can have subtasks, level of subtask is not limited
     ```sh
     docker exec php-fpm_todo_list php artisan db:seed
     ```
-   
+
+6. App key generate
+    ```sh
+    docker exec php-fpm_todo_list php artisan key:generate
+    ```
+7. Update configs
+    ```sh
+    docker exec php-fpm_todo_list php artisan optimize:clear
+    ```
+
+
 ## Running tests
 
 ```sh
