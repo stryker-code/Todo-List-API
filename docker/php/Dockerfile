@@ -8,6 +8,8 @@ RUN set -eux; \
     apt-get update; \
     apt-get upgrade -y; \
     apt-get install -y --no-install-recommends \
+            zip \
+            unzip \
             curl \
             libmemcached-dev \
             libz-dev \
@@ -23,6 +25,8 @@ RUN set -eux; \
     rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-install pdo_mysql mbstring pcntl
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Add user for laravel application
 RUN groupadd -g 1000 www
