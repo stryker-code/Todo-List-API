@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\TaskRepositoryInterface;
-use App\Contracts\TaskServiceInterface;
 use App\Http\Requests\Task\GetTasksRequest;
 use App\Http\Requests\Task\StoreTaskRequest;
 use App\Http\Requests\Task\UpdateTaskRequest;
@@ -15,9 +14,6 @@ use Illuminate\Http\Response;
 
 class TaskController extends Controller
 {
-    public function __construct(protected TaskServiceInterface $taskService)
-    {
-    }
     /**
      * Display a listing of the resource.
      */
@@ -26,9 +22,10 @@ class TaskController extends Controller
         TaskRepositoryInterface $repository
     ): AnonymousResourceCollection
     {
-        return TaskResource::collection(
-            $repository->filter($request)
-        );
+        $data = $repository->filter($request);
+
+        return TaskResource::collection($data)
+            ->additional(['count' => $data->count()]);
     }
 
     /**

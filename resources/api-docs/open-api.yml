@@ -111,24 +111,11 @@ paths:
           schema:
             type: string
           example: application/json
-        - name: status
+        - name: search
           in: query
           schema:
             type: string
-        - name: priority
-          in: query
-          schema:
-            type: string
-        - name: title
-          in: query
-          schema:
-            type: string
-          example: Test
-        - name: description
-          in: query
-          schema:
-            type: string
-          example: F
+          example: Shawn Moen
       responses:
         '200':
           description: Successful response
@@ -166,7 +153,7 @@ paths:
             schema:
               type: object
               example:
-                name: Updated
+                title: Updated
                 description: >-
                   Updated characterization and documentation of tasks or
                   subtasks and execution conditions
@@ -249,7 +236,7 @@ paths:
             schema:
               type: object
               example:
-                name: MyTASK
+                title: MyTASK
                 description: >-
                   Systematic characterization and documentation of tasks or
                   subtasks and execution conditions

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->index()->constrained();
+            $table->unsignedBigInteger('parent_id')->index()->nullable();
             $table->string('title');
             $table->text('description');
             $table->tinyInteger('priority')
@@ -35,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('todo_lists');
+        Schema::dropIfExists('tasks');
     }
 };

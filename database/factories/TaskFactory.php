@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Enums\TaskPriority;
-use App\Enums\TaskStatus;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -29,7 +28,6 @@ class TaskFactory extends Factory
             'title' => fake()->name(),
             'description' => fake()->text(1000),
             'priority' => fake()->randomElement(TaskPriority::getValues()),
-            //'status' => fake()->randomElement(TaskStatus::getValues()),
         ];
     }
 }
