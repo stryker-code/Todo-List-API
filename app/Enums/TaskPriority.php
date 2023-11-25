@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-use App\Traits\EnumExtraFeature as values;
+use App\Traits\EnumExtraFeature as Values;
 
 enum TaskPriority: int {
     case LOW = 1;
@@ -11,5 +11,5 @@ enum TaskPriority: int {
     case HIGH = 4;
     case URGENT = 5;
 
-    use values;
+    use Values;
 }

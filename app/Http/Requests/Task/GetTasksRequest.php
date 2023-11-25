@@ -33,12 +33,4 @@ class GetTasksRequest extends FormRequest
             'completed_at' => 'nullable|in:asc,desc'
         ];
     }
-
-    public function prepareForValidation()
-    {
-        $this->merge([
-            'created_at' => $this->created_at ?? 'asc',
-            'completed_at' => $this->completed_at ?? 'asc'
-        ]);
-    }
 }

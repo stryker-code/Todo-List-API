@@ -21,7 +21,10 @@ class TaskRepository implements TaskRepositoryInterface
                 $query->where('priority', [$request->priority]);
             })->when($request->status, function ($query) use ($request) {
                 $query->where('status', [$request->status]);
-            })->orderby('created_at', $request->created_at)
-            ->orderby('completed_at', $request->completed_at)->get();
+            })->when($request->created_at, function ($query) use ($request) {
+                $query->orderby('created_at', $request->created_at);
+            })->when($request->completed_at, function ($query) use ($request) {
+                $query->orderby('completed_at', $request->completed_at);
+            })->get();
     }
 }

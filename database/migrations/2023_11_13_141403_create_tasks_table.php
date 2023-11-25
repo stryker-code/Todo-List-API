@@ -1,5 +1,7 @@
 <?php
 
+use App\Enums\TaskPriority;
+use App\Enums\TaskStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,10 +21,10 @@ return new class extends Migration
             $table->text('description');
             $table->tinyInteger('priority')
                 ->index()
-                ->default(1)
+                ->default(TaskPriority::LOW->value)
                 ->comment('1 .. 5');
-            $table->boolean('status')
-                ->default(false)
+            $table->tinyInteger('status')
+                ->default(TaskStatus::TODO->value)
                 ->comment('0=Todo, 1=Done');
             $table->timestamps();
             $table->timestamp('completed_at')->nullable();
