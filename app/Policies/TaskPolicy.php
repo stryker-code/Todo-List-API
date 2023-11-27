@@ -20,6 +20,7 @@ class TaskPolicy
      */
     public function view(User $user, Task $task): bool
     {
+        return $this->isTaskBelongsToUser($user, $task);
     }
 
     /**
@@ -38,7 +39,7 @@ class TaskPolicy
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * Can't remove already done task.
      */
     public function delete(User $user, Task $task): bool
     {
