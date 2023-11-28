@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\TaskRepositoryInterface;
+use App\Contracts\TaskServiceInterface;
 use App\Http\Requests\Task\GetTasksRequest;
 use App\Http\Requests\Task\StoreTaskRequest;
 use App\Http\Requests\Task\UpdateTaskRequest;
 use App\Http\Resources\TaskResource;
 use App\Models\Task;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
@@ -40,6 +42,7 @@ class TaskController extends Controller
         return response()->json(
             [
                 'id' => $task->id,
+                'parent_id' => $task->parent_id,
                 'message' => 'Task has been created'
             ],
             Response::HTTP_CREATED);
@@ -47,20 +50,30 @@ class TaskController extends Controller
 
     /**
      * Display the specified resource.
+     *
+     * @throws AuthorizationException
      */
     public function show(Task $task): TaskResource
     {
+        $this->authorize('view', $task);
+
         return TaskResource::make($task);
     }
 
     /**
      * Update the specified resource in storage.
+     *
+     * @throws AuthorizationException
      */
-    public function update(UpdateTaskRequest $request, Task $task): JsonResponse
+    public function update(
+        UpdateTaskRequest $request,
+        TaskServiceInterface $service,
+        Task $task
+    ): JsonResponse
     {
         $this->authorize('update', $task);
 
-        $task->update($request->validated());
+        $service->update($request, $task);
 
         return response()->json(
             ['message' => 'Task has been updated'],
@@ -70,6 +83,8 @@ class TaskController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @throws AuthorizationException
      */
     public function destroy(Task $task): JsonResponse
     {

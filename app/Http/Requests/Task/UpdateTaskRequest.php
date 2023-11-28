@@ -26,7 +26,7 @@ class UpdateTaskRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'status' => [new Enum(TaskStatus::class)],
+            'status' => 'in:'.TaskStatus::DONE->value,
         ];
 
         if ($this->getMethod() !== 'PATCH') {

@@ -27,7 +27,7 @@ paths:
             schema:
               type: object
               example:
-                email: test@mahfioff1l
+                email: test@mail.test
                 password: '12345678'
       parameters:
         - name: Accept
@@ -111,11 +111,11 @@ paths:
           schema:
             type: string
           example: application/json
-        - name: search
+        - name: completed_at
           in: query
           schema:
             type: string
-          example: Shawn Moen
+          example: asc
       responses:
         '200':
           description: Successful response
@@ -187,6 +187,7 @@ paths:
               type: object
               example:
                 status: 1
+                test: 4
       parameters:
         - name: Accept
           in: header
@@ -241,6 +242,7 @@ paths:
                   Systematic characterization and documentation of tasks or
                   subtasks and execution conditions
                 priority: '1'
+                parent_id: '20 - optional'
       parameters:
         - name: Accept
           in: header

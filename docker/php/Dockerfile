@@ -11,15 +11,8 @@ RUN set -eux; \
             zip \
             unzip \
             curl \
-            libmemcached-dev \
             libz-dev \
-            libpq-dev \
-            libjpeg-dev \
-            libpng-dev \
             libfreetype6-dev \
-            libssl-dev \
-            libwebp-dev \
-            libxpm-dev \
             libmcrypt-dev \
             libonig-dev; \
     rm -rf /var/lib/apt/lists/*
