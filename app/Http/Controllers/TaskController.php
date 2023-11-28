@@ -42,6 +42,7 @@ class TaskController extends Controller
         return response()->json(
             [
                 'id' => $task->id,
+                'parent_id' => $task->parent_id,
                 'message' => 'Task has been created'
             ],
             Response::HTTP_CREATED);

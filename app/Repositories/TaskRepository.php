@@ -13,8 +13,9 @@ class TaskRepository implements TaskRepositoryInterface
     {
         $search = $request->search;
 
-        return Task::query()
+        return Task::query()->with('subtasks')
             ->where('user_id', [$request->user()->id])
+            ->where('parent_id', null)
             ->when($request->search, function ($query) use ($search) {
                 $query->whereFullText(['title', 'description'], $search);
             })->when($request->priority, function ($query) use ($request) {

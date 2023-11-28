@@ -12,6 +12,7 @@ class Task extends Model
     use HasFactory;
 
     protected $fillable = [
+        'parent_id',
         'title',
         'description',
         'priority',
@@ -30,6 +31,6 @@ class Task extends Model
      */
     public function subtasks(): HasMany
     {
-        return $this->hasMany(self::class, 'parent_id');
+        return $this->hasMany(static::class, 'parent_id');
     }
 }
