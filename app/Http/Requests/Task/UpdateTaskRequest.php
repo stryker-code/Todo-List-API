@@ -28,6 +28,7 @@ class UpdateTaskRequest extends FormRequest
         $rules = [
             'status' => 'in:'.TaskStatus::DONE->value,
         ];
+        // Add check if task have subtasks
 
         if ($this->getMethod() !== 'PATCH') {
             $rules['title'] = 'required|string|max:255';

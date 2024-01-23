@@ -24,6 +24,7 @@ return new class extends Migration
                 ->default(TaskPriority::LOW->value)
                 ->comment('1 .. 5');
             $table->tinyInteger('status')
+                ->index()
                 ->default(TaskStatus::TODO->value)
                 ->comment('0=Todo, 1=Done');
             $table->timestamps();
