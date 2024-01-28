@@ -32,6 +32,8 @@ Route::group(['prefix' => 'v1'], function () {
             return $request->user();
         });
 
+        Route::get('user/index', [UserController::class, 'index']);
+
         Route::post('tokens/revoke_all', [SanctumController::class, 'revokeAll']);
     });
 });
